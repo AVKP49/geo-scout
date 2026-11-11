@@ -1,0 +1,1 @@
+{% extends 'base.html' %}{% block body %}<section class="container narrow simple-page"><h1>{{ 'You’re unsubscribed.' if done else 'Stop follow-up emails?' }}</h1>{% if not done %}<form method="post"><button class="button primary">Unsubscribe</button></form>{% else %}<p>No more report follow-ups will be sent to this address.</p>{% endif %}</section>{% endblock %}

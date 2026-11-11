@@ -1,0 +1,1 @@
+<div id="scan-progress" {% if scan.status == 'complete' %}data-report-url="/r/{{ scan.report_slug }}"{% elif scan.status != 'failed' %}hx-get="/scan/{{ scan.id }}/fragment" hx-trigger="every 3s" hx-swap="outerHTML"{% endif %}>{% include 'progress_fragment.html' %}</div>

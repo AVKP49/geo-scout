@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block head %}{% if site_key %}<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>{% endif %}{% endblock %}
+{% block body %}
+<section class="hero container">
+  <div class="hero-copy">
+    <p class="eyebrow"><span class="status-dot"></span> YOUR BUSINESS. INSIDE THE ANSWER.</p>
+    <h1>When AI answers,<br>do you <em>show up?</em></h1>
+    <p class="hero-description">Your next customer is asking for a recommendation. See whether your business gets cited—and what you can improve.</p>
+    <div class="hero-proof"><span>Google AI Overviews</span><span>Perplexity API</span><span class="muted">Sampled, with sources</span></div>
+    <a class="text-link" href="#examples">See what a report looks like <span aria-hidden="true">↓</span></a>
+    <div class="tiny-diagram" aria-hidden="true"><span>THE QUESTION</span><span class="diagram-line"></span><span>THE ANSWER</span><span class="diagram-line"></span><strong>YOUR BUSINESS?</strong></div>
+  </div>
+  <div class="scan-panel" id="scan-panel">
+    <div class="panel-heading"><span class="eyebrow">YOUR FREE VISIBILITY CHECK</span><span class="step-indicator" id="step-label">01 / 02</span></div>
+    <h2>Start with your business.</h2><p class="panel-subtitle">A few questions. A report you can use.</p>
+    <form id="scan-form" data-ready="{{ 'true' if ready else 'false' }}" data-max-queries="{{ product.max_queries }}" data-min-queries="{{ product.min_queries }}">
+      <div id="business-fields">
+        <label for="business_name">Business name</label><input id="business_name" name="business_name" placeholder="Your business name" required minlength="2" maxlength="100" autocomplete="organization">
+        <label for="website_url">Website</label><input id="website_url" name="website_url" placeholder="yourbusiness.com" required maxlength="2048" autocomplete="url">
+        <div class="field-pair"><div><label for="city">City / area</label><input id="city" name="city" placeholder="Fremont, CA" required minlength="2" maxlength="100"></div><div><label for="category">Business category</label><select id="category" name="category" required><option value="">Choose category</option>{% for key, category in product.categories.items() %}<option value="{{ key }}">{{ category.label }}</option>{% endfor %}</select></div></div>
+        <button class="button primary full" type="submit" id="suggest-button">Choose your questions <span aria-hidden="true">→</span></button>
+      </div>
+      <div id="query-fields" hidden>
+        <p class="query-intro">What would a customer ask? Edit these questions to fit your business.</p>
+        <div id="query-list"></div><button class="text-link add-query" type="button" id="add-query">+ Add a question</button>
+        {% if site_key %}<div class="cf-turnstile" data-sitekey="{{ site_key }}" data-action="free_scan"></div>{% endif %}
+        <button class="button primary full" type="submit" id="start-button" {% if not ready %}disabled{% endif %}>Check my visibility <span aria-hidden="true">→</span></button>
+        <button class="text-link" type="button" id="back-button">← Edit business details</button>
+      </div>
+      <p id="form-error" class="form-error" role="alert" hidden></p>
+    </form>
+    {% if not ready %}<div class="availability"><span class="status-dot amber"></span><span><strong>Preview available. Live scans coming next.</strong><br>Explore the report while the scan services are being connected.</span></div>{% else %}<p class="form-note">No account. No payment. One free scan per website every {{ product.cooldown_days }} days.</p>{% endif %}
+  </div>
+</section>
+<section class="process-band"><div class="container process-grid"><div><span class="number">01</span><h3>Ask the right questions.</h3><p>The searches that matter to your business, in your area.</p></div><div><span class="number">02</span><h3>Look inside the answers.</h3><p>See the citations and the sources our API scans returned.</p></div><div><span class="number">03</span><h3>Take one useful action.</h3><p>A practical recommendation, with the evidence attached.</p></div></div></section>
+<section class="container examples-section" id="examples"><div class="section-heading"><div><p class="eyebrow">THE REPORT, WITHOUT THE GUESSWORK</p><h2>Small report.<br>Clear next move.</h2></div><p>One citation score. Your questions and sources. One thing to work on next.</p></div>
+  <div class="sample-grid">{% for kind, title, category, color in [('hvac', 'Heating & air', 'Fremont, CA', 'green'), ('plumber', 'Local plumbing', 'San Jose, CA', 'sand'), ('food', 'Recipe journal', 'Content search', 'purple')] %}<a class="sample-card {{ color }}" href="/sample/{{ kind }}"><div class="sample-card-top"><span class="sample-badge">SAMPLE</span><span aria-hidden="true">↗</span></div><h3>{{ title }}</h3><p>{{ category }}</p><div class="sample-graphic" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div><span class="sample-card-bottom">Explore an illustrative report →</span></a>{% endfor %}</div>
+  <p class="sample-caption">Fictional examples. Sample numbers show the format; they are not live scan results.</p>
+</section>
+<section class="container honesty-section"><div><p class="eyebrow">WHAT THIS CHECK CAN TELL YOU</p><h2>A sample.<br>With the sources.</h2></div><div class="honesty-copy"><p>AI answers change. A scan tells you what was cited in the answers we checked at that moment. It does not tell you what every customer sees.</p><p>Perplexity results come from its API. Search demand is an estimate from traditional Google search data. We do not measure AI query volume, lost customers or competitor clicks.</p><p>Consumer ChatGPT is not covered. Gemini grounding is not covered because its current terms restrict this type of tracking.</p><a href="https://aistudio.google.com/docs/terms#grounding-with-google-search" class="text-link" rel="noopener noreferrer" target="_blank">Read the Gemini grounding terms ↗</a></div></section>
+<section class="container faq-section"><p class="eyebrow">A FEW GOOD QUESTIONS</p><h2>Before you scan.</h2><details><summary>What does the citation score mean?</summary><p>The percentage of completed checks that cited your website, weighted toward service questions. Failed checks and missing Google AI Overviews are excluded and shown separately. Every report includes the calculation.</p></details><details><summary>Will this tell me how many customers I’m missing?</summary><p>No. We can show estimated traditional search demand and sampled citations. These do not establish lost customers, lost revenue or actual AI search volume.</p></details><details><summary>Does a recommendation change my website?</summary><p>You review and apply any change yourself. The report gives you an evidence-based starting point. A suggested action is not proof of why an engine omitted your business.</p></details><details><summary>Can I share the report?</summary><p>Yes. Anyone with the report link can view it. The report does not include your email, and we ask search engines not to index it.</p></details></section>
+{% endblock %}

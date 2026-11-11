@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <meta name="description" content="See whether your business is cited in sampled AI search answers. Review the sources and a practical next action.">
+  {% if request.path.startswith(('/r/', '/scan/', '/sample/')) %}<meta name="robots" content="noindex,nofollow">{% endif %}
+  <title>{% block title %}{{ product.name }} — Get found in the answer{% endblock %}</title>
+  <link rel="icon" href="{{ url_for('static', filename='mark.svg') }}" type="image/svg+xml">
+  <link rel="stylesheet" href="{{ url_for('static', filename='tailwind.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}">
+  <script src="{{ url_for('static', filename='htmx.min.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='app.js') }}" defer></script>
+  {% block head %}{% endblock %}
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header container"><a href="/" class="brand"><img src="{{ url_for('static', filename='mark.svg') }}" width="32" height="32" alt="">{{ product.name }}</a><span class="header-note">A clearer view of AI search.</span><a class="quiet-link" href="/sample/hvac">Explore a sample <span aria-hidden="true">↗</span></a></header>
+  <main id="main">{% block body %}{% endblock %}</main>
+  <footer class="site-footer container"><a class="brand small" href="/">{{ product.name }}</a><span>Evidence first. One useful next step.</span><a href="/privacy">Privacy & data</a></footer>
+</body>
+</html>

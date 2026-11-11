@@ -1,0 +1,11 @@
+.git
+.venv
+.env
+.env.*
+instance
+node_modules
+docs/screenshots
+.pytest_cache
+.mypy_cache
+.ruff_cache
+__pycache__

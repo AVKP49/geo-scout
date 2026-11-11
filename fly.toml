@@ -1,0 +1,37 @@
+app = "geo-scout-avkp49"
+primary_region = "sjc"
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  APP_ENV = "production"
+  SCAN_ENABLED = "false"
+  PUBLIC_BASE_URL = "https://geo-scout-avkp49.fly.dev"
+  TRUSTED_PROXY_HOPS = "1"
+
+[deploy]
+  release_command = "flask --app wsgi db upgrade"
+
+[processes]
+  web = "gunicorn --bind 0.0.0.0:8080 --workers 2 --timeout 45 wsgi:app"
+  worker = "celery -A celery_app.celery worker --loglevel=warning --concurrency=2"
+  beat = "celery -A celery_app.celery beat --loglevel=warning --schedule=/tmp/celerybeat-schedule"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = "stop"
+  auto_start_machines = true
+  min_machines_running = 1
+  processes = ["web"]
+
+  [[http_service.checks]]
+    interval = "30s"
+    timeout = "5s"
+    method = "GET"
+    path = "/healthz"
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "512mb"

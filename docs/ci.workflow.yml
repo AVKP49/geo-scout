@@ -1,0 +1,33 @@
+name: Phase 0 checks
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.lock
+      - run: python scripts/build_assets.py
+      - run: ruff check app tests scripts wsgi.py celery_app.py
+      - run: mypy app
+      - run: pytest -q
+      - run: playwright install --with-deps chromium
+      - run: RUN_E2E=1 pytest tests/test_e2e.py -q
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: review-screenshots
+          path: docs/screenshots/*.png
+          if-no-files-found: ignore
+      - run: pip-audit --disable-pip --no-deps -r requirements.lock
+      - run: docker run --rm -v "$PWD:/repo" zricethezav/gitleaks:v8.24.3 detect --source=/repo --no-banner --redact
+      - run: docker build -t geo-scout:test .

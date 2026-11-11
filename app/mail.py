@@ -35,6 +35,8 @@ def send_due_emails() -> None:
     captures = db.session.query(EmailCapture).filter(EmailCapture.unsubscribed_at.is_(None)).all()
     for capture in captures:
         for sequence, day in [(1, 0), (2, 3), (3, 7)]:
+            if sequence > 1 and not config["POSTMARK_FOLLOWUP_STREAM"]:
+                continue
             if capture.created_at.replace(tzinfo=now().tzinfo) > now() - timedelta(days=day):
                 continue
             if sequence == 3 and not config["FOUNDER_CALENDAR_URL"]:
@@ -63,7 +65,9 @@ def send_due_emails() -> None:
                         "To": capture.email,
                         "Subject": subject,
                         "TextBody": body,
-                        "MessageStream": "outbound",
+                        "MessageStream": "outbound"
+                        if sequence == 1
+                        else config["POSTMARK_FOLLOWUP_STREAM"],
                         "Headers": [
                             {
                                 "Name": "List-Unsubscribe",

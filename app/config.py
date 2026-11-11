@@ -44,6 +44,7 @@ def settings() -> dict[str, Any]:
                 "TURNSTILE_SITE_KEY",
                 "TURNSTILE_SECRET_KEY",
                 "POSTMARK_SERVER_TOKEN",
+                "POSTMARK_FOLLOWUP_STREAM",
                 "EMAIL_FROM",
                 "FOUNDER_CALENDAR_URL",
                 "SENTRY_DSN",

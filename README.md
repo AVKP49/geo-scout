@@ -27,7 +27,7 @@ cp .env.example .env
 Open http://127.0.0.1:5050. Explore the editable query form and three clearly labeled
 sample reports. Preview does not consume API credit or capture emails.
 
-Compiled Tailwind and HTMX are committed. To rebuild CSS after template edits:
+Tailwind preflight and HTMX are committed; the design uses app.css. To build utilities after template edits:
 `python3.12 scripts/build_assets.py`. Upstream artifacts are pinned and SHA-256 checked.
 
 ## Live scanning setup
@@ -59,8 +59,10 @@ RUN_E2E=1 .venv/bin/pytest tests/test_e2e.py -q
 ```
 
 No tests call paid APIs. E2E scan coverage uses isolated fixtures, not real results.
-GitHub Actions runs lint, strict type checks, unit/integration/E2E checks, dependency and
-secret audits, and builds the container.
+The GitHub Actions template covers lint, strict type checks, unit/integration/E2E checks,
+dependency and secret audits, and the container build. It is currently saved at
+`docs/ci.workflow.yml`: the connected GitHub token lacks workflow scope. After GitHub
+authentication is updated, move it to `.github/workflows/ci.yml` and push to enable CI.
 
 ## Validation metrics and privacy maintenance
 

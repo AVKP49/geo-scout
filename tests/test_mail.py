@@ -7,6 +7,7 @@ from app.models import EmailCapture, EmailDelivery, Event, FreeScan, db, now
 def test_email_sequence_does_not_duplicate_and_respects_unsubscribe(app, monkeypatch):
     app.config.update(
         POSTMARK_SERVER_TOKEN="fixture-only",
+        POSTMARK_FOLLOWUP_STREAM="fixture-followups",
         EMAIL_FROM="sender@example.com",
         FOUNDER_CALENDAR_URL="https://example.com/book",
     )

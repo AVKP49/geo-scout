@@ -24,7 +24,8 @@
         <p class="query-intro">What would a customer ask? Edit these questions to fit your business.</p>
         <div id="query-list"></div><button class="text-link add-query" type="button" id="add-query">+ Add a question</button>
         {% if site_key %}<div class="cf-turnstile" data-sitekey="{{ site_key }}" data-action="free_scan"></div>{% endif %}
-        <button class="button primary full" type="submit" id="start-button" {% if not ready %}disabled{% endif %}>Check my visibility <span aria-hidden="true">→</span></button>
+        <button class="button primary full" type="submit" id="start-button" {% if not ready and not static_preview %}disabled{% endif %}>{{ 'View sample report' if static_preview else 'Check my visibility' }} <span aria-hidden="true">→</span></button>
+        {% if static_preview %}<p class="form-note">Opens a fictional example. Your business and questions are not scanned.</p>{% endif %}
         <button class="text-link" type="button" id="back-button">← Edit business details</button>
       </div>
       <p id="form-error" class="form-error" role="alert" hidden></p>

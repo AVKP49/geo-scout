@@ -56,6 +56,11 @@ if (form) {
       } else {
         payload.queries = [...list.querySelectorAll("input")].map(input => input.value.trim());
         if (payload.queries.length < minimum) throw new Error(`Keep at least ${minimum} questions.`);
+        if (document.body.dataset.staticPreview === "true") {
+          const kind = ({plumber: "plumber", food_blog: "food"})[payload.category] || "hvac";
+          window.location.assign("/geo-scout/sample/" + kind + "/");
+          return;
+        }
         payload.captcha = payload["cf-turnstile-response"] || "";
         const data = await postJSON("/api/v1/free-scans", payload); window.location.assign(data.status_url);
       }

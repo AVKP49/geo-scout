@@ -13,7 +13,7 @@
   <script src="{{ url_for('static', filename='app.js') }}" defer></script>
   {% block head %}{% endblock %}
 </head>
-<body>
+<body{% if static_preview %} data-static-preview="true"{% endif %}>
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header container"><a href="/" class="brand"><img src="{{ url_for('static', filename='mark.svg') }}" width="32" height="32" alt="">{{ product.name }}</a><span class="header-note">A clearer view of AI search.</span><a class="quiet-link" href="/sample/hvac">Explore a sample <span aria-hidden="true">↗</span></a></header>
   <main id="main">{% block body %}{% endblock %}</main>

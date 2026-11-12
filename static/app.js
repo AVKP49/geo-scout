@@ -1,6 +1,14 @@
 "use strict";
 const csrfToken = () => document.querySelector('meta[name="csrf-token"]').content;
 async function postJSON(url, payload) {
+  if (document.body.dataset.staticPreview === "true") {
+    if (url !== "/api/v1/queries/suggest") throw new Error("Live scans are not available in this preview. Explore a sample report below.");
+    const response = await fetch("/geo-scout/static/preview-questions.json");
+    if (!response.ok) throw new Error("Could not load the preview questions. Please try again.");
+    const config = await response.json(), category = config.categories[payload.category];
+    if (!category) throw new Error("Choose a business category.");
+    return {queries: (category.queries || config.default_queries).map(text => text.replace(/\{(city|business|service)\}/g, (_, key) => ({city: payload.city.trim(), business: payload.business_name.trim(), service: category.service})[key]))};
+  }
   const response = await fetch(url, {method: "POST", headers: {"Content-Type": "application/json", "X-CSRFToken": csrfToken()}, body: JSON.stringify(payload)});
   let body;
   try { body = await response.json(); } catch { throw new Error("The request could not finish. Please try again."); }

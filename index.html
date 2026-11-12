@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="csrf-token" content="IjU5ODVjNGRkN2Y0ZjBmYTBkNGM0ODliNzM4OTQzM2YzY2M0NjVjZWIi.avUG6g.llD_LoWPybaZpPfTU_4Q7aJ9sQ8">
+  <meta name="description" content="See whether your business is cited in sampled AI search answers. Review the sources and a practical next action.">
+  
+  <title>GEO Scout — Get found in the answer</title>
+  <link rel="icon" href="/geo-scout/static/mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/geo-scout/static/tailwind.css">
+  <link rel="stylesheet" href="/geo-scout/static/app.css">
+  <script src="/geo-scout/static/htmx.min.js" defer></script>
+  <script src="/geo-scout/static/app.js" defer></script>
+  
+</head>
+<body data-static-preview="true">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header container"><a href="/geo-scout/" class="brand"><img src="/geo-scout/static/mark.svg" width="32" height="32" alt="">GEO Scout</a><span class="header-note">A clearer view of AI search.</span><a class="quiet-link" href="/geo-scout/sample/hvac">Explore a sample <span aria-hidden="true">↗</span></a></header>
+  <main id="main">
+<section class="hero container">
+  <div class="hero-copy">
+    <p class="eyebrow"><span class="status-dot"></span> YOUR BUSINESS. INSIDE THE ANSWER.</p>
+    <h1>When AI answers,<br>do you <em>show up?</em></h1>
+    <p class="hero-description">Your next customer is asking for a recommendation. See whether your business gets cited—and what you can improve.</p>
+    <div class="hero-proof"><span>Google AI Overviews</span><span>Perplexity API</span><span class="muted">Sampled, with sources</span></div>
+    <a class="text-link" href="#examples">See what a report looks like <span aria-hidden="true">↓</span></a>
+    <div class="tiny-diagram" aria-hidden="true"><span>THE QUESTION</span><span class="diagram-line"></span><span>THE ANSWER</span><span class="diagram-line"></span><strong>YOUR BUSINESS?</strong></div>
+  </div>
+  <div class="scan-panel" id="scan-panel">
+    <div class="panel-heading"><span class="eyebrow">YOUR FREE VISIBILITY CHECK</span><span class="step-indicator" id="step-label">01 / 02</span></div>
+    <h2>Start with your business.</h2><p class="panel-subtitle">A few questions. A report you can use.</p>
+    <form id="scan-form" data-ready="false" data-max-queries="5" data-min-queries="3">
+      <div id="business-fields">
+        <label for="business_name">Business name</label><input id="business_name" name="business_name" placeholder="Your business name" required minlength="2" maxlength="100" autocomplete="organization">
+        <label for="website_url">Website</label><input id="website_url" name="website_url" placeholder="yourbusiness.com" required maxlength="2048" autocomplete="url">
+        <div class="field-pair"><div><label for="city">City / area</label><input id="city" name="city" placeholder="Fremont, CA" required minlength="2" maxlength="100"></div><div><label for="category">Business category</label><select id="category" name="category" required><option value="">Choose category</option><option value="hvac">HVAC</option><option value="plumber">Plumber</option><option value="electrician">Electrician</option><option value="roofer">Roofer</option><option value="contractor">General contractor</option><option value="dentist">Dentist</option><option value="salon">Salon</option><option value="restaurant">Restaurant</option><option value="lawyer">Lawyer</option><option value="real_estate">Real estate agent</option><option value="food_blog">Food blog</option><option value="local_guide">Local guide</option><option value="landscaper">Landscaper</option><option value="painter">Painter</option><option value="cleaner">Cleaning service</option><option value="auto_repair">Auto repair</option><option value="pest_control">Pest control</option><option value="garage_door">Garage door service</option><option value="moving">Moving company</option><option value="pet_grooming">Pet groomer</option><option value="fitness">Fitness studio</option><option value="photography">Photographer</option><option value="childcare">Childcare</option><option value="accountant">Accountant</option><option value="other">Other local business</option></select></div></div>
+        <button class="button primary full" type="submit" id="suggest-button">Choose your questions <span aria-hidden="true">→</span></button>
+      </div>
+      <div id="query-fields" hidden>
+        <p class="query-intro">What would a customer ask? Edit these questions to fit your business.</p>
+        <div id="query-list"></div><button class="text-link add-query" type="button" id="add-query">+ Add a question</button>
+        
+        <button class="button primary full" type="submit" id="start-button" disabled>Check my visibility <span aria-hidden="true">→</span></button>
+        <button class="text-link" type="button" id="back-button">← Edit business details</button>
+      </div>
+      <p id="form-error" class="form-error" role="alert" hidden></p>
+    </form>
+    <div class="availability"><span class="status-dot amber"></span><span><strong>Preview available. Live scans coming next.</strong><br>Explore the report while the scan services are being connected.</span></div>
+  </div>
+</section>
+<section class="process-band"><div class="container process-grid"><div><span class="number">01</span><h3>Ask the right questions.</h3><p>The searches that matter to your business, in your area.</p></div><div><span class="number">02</span><h3>Look inside the answers.</h3><p>See the citations and the sources our API scans returned.</p></div><div><span class="number">03</span><h3>Take one useful action.</h3><p>A practical recommendation, with the evidence attached.</p></div></div></section>
+<section class="container examples-section" id="examples"><div class="section-heading"><div><p class="eyebrow">THE REPORT, WITHOUT THE GUESSWORK</p><h2>Small report.<br>Clear next move.</h2></div><p>One citation score. Your questions and sources. One thing to work on next.</p></div>
+  <div class="sample-grid"><a class="sample-card green" href="/geo-scout/sample/hvac"><div class="sample-card-top"><span class="sample-badge">SAMPLE</span><span aria-hidden="true">↗</span></div><h3>Heating &amp; air</h3><p>Fremont, CA</p><div class="sample-graphic" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div><span class="sample-card-bottom">Explore an illustrative report →</span></a><a class="sample-card sand" href="/geo-scout/sample/plumber"><div class="sample-card-top"><span class="sample-badge">SAMPLE</span><span aria-hidden="true">↗</span></div><h3>Local plumbing</h3><p>San Jose, CA</p><div class="sample-graphic" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div><span class="sample-card-bottom">Explore an illustrative report →</span></a><a class="sample-card purple" href="/geo-scout/sample/food"><div class="sample-card-top"><span class="sample-badge">SAMPLE</span><span aria-hidden="true">↗</span></div><h3>Recipe journal</h3><p>Content search</p><div class="sample-graphic" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div><span class="sample-card-bottom">Explore an illustrative report →</span></a></div>
+  <p class="sample-caption">Fictional examples. Sample numbers show the format; they are not live scan results.</p>
+</section>
+<section class="container honesty-section"><div><p class="eyebrow">WHAT THIS CHECK CAN TELL YOU</p><h2>A sample.<br>With the sources.</h2></div><div class="honesty-copy"><p>AI answers change. A scan tells you what was cited in the answers we checked at that moment. It does not tell you what every customer sees.</p><p>Perplexity results come from its API. Search demand is an estimate from traditional Google search data. We do not measure AI query volume, lost customers or competitor clicks.</p><p>Consumer ChatGPT is not covered. Gemini grounding is not covered because its current terms restrict this type of tracking.</p><a href="https://aistudio.google.com/docs/terms#grounding-with-google-search" class="text-link" rel="noopener noreferrer" target="_blank">Read the Gemini grounding terms ↗</a></div></section>
+<section class="container faq-section"><p class="eyebrow">A FEW GOOD QUESTIONS</p><h2>Before you scan.</h2><details><summary>What does the citation score mean?</summary><p>The percentage of completed checks that cited your website, weighted toward service questions. Failed checks and missing Google AI Overviews are excluded and shown separately. Every report includes the calculation.</p></details><details><summary>Will this tell me how many customers I’m missing?</summary><p>No. We can show estimated traditional search demand and sampled citations. These do not establish lost customers, lost revenue or actual AI search volume.</p></details><details><summary>Does a recommendation change my website?</summary><p>You review and apply any change yourself. The report gives you an evidence-based starting point. A suggested action is not proof of why an engine omitted your business.</p></details><details><summary>Can I share the report?</summary><p>Yes. Anyone with the report link can view it. The report does not include your email, and we ask search engines not to index it.</p></details></section>
+</main>
+  <footer class="site-footer container"><a class="brand small" href="/geo-scout/">GEO Scout</a><span>Evidence first. One useful next step.</span><a href="/geo-scout/privacy">Privacy & data</a></footer>
+</body>
+</html>

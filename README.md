@@ -1,10 +1,16 @@
 # GEO Scout
 
 Phase 0 of a local AI-search visibility product. Flask, Jinja, Tailwind and HTMX;
-PostgreSQL, Celery and Redis for live scanning. Private source repository:
+PostgreSQL, Celery and Redis for live scanning. Public source repository:
 https://github.com/AVKP49/geo-scout
 
 ## Current status
+
+Public preview: **https://avkp49.github.io/geo-scout/**
+
+GitHub Pages serves the business form, editable suggested questions and three fictional
+sample reports. It does not run live scans or collect email addresses. The full Flask
+backend requires separate hosting.
 
 Working local preview and tested scan orchestration using fixtures. Real adapters exist
 for Google AI Overviews via DataForSEO and Perplexity Agent API. Live scans are disabled
@@ -15,6 +21,10 @@ See [original spec](docs/SPEC.md), [build decisions](docs/decisions.md),
 [vendor verification](docs/vendor-check.md) and [launch checklist](docs/launch.md).
 
 ## Local preview (no accounts needed)
+
+To regenerate the GitHub Pages preview, run `.venv/bin/python scripts/export_pages.py`.
+Publish the contents of `dist/pages/` to the `gh-pages` branch. Pages uses that branch's
+root directory; no API credentials or database records are included in the export.
 
 ```sh
 python3.12 -m venv .venv
